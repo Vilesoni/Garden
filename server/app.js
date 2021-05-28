@@ -6,8 +6,8 @@ const uploading = require("./uploading/uploading");
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/upload-images", uploading.upload, uploading.get);
+app.post("/api/upload-images", uploading.upload.single("file"), uploading.get);
 
-app.listen(3001, () => {
-  console.log("Running on 3001!");
+app.listen(8000, () => {
+  console.log("Running on 8000!");
 });
