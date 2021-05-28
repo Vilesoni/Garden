@@ -1,0 +1,12 @@
+.text{
+  background-color: #dfdfdf;
+  border-radius: 1em;
+  padding: .1em .3em;
+  box-sizing: border-box;
+  color: #222b18;
+  border: 1px solid #e1e1e1;
+}
+.text:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+.container{
+  border-radius: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  border-radius: 0.5em;
+  width: 100%;
+}
+.small {
+  width: 32px;
+  height: 32px;
+}
+.medium {
+  width: 48px;
+  height: 48px;
+}
+.large {
+  width: 64px;
+}
+.huge {
+  width: 100px;
+  height: 100px;
+}
+.auto{
+  border-radius: 0.5em;
+  height: 70%;
+  width: 70%;
+}

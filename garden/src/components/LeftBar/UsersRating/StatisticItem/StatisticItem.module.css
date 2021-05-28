@@ -1,0 +1,32 @@
+.StatisticItem {
+  display: grid;
+  grid-template-areas: "img name rating";
+  grid-template-columns: 32px 3fr 1fr;
+  row-gap: 1em;
+  column-gap: 1em;
+  align-items: center;
+  padding: 0.5em;
+  background-color: #dfdfdf;
+  border: 1px solid #e1e1e1;
+  border-radius: 0.5em;
+}
+.img {
+  grid-area: img;
+  display: flex;
+  align-items: center;
+}
+.name > a,
+.rating {
+  color: #222b18;
+  font-size: 1em;
+}
+.name > a:hover {
+  text-decoration: underline;
+}
+.rating {
+  text-align: center;
+  color: #617c50;
+  background-color: #86a573b6;
+  border-radius: 1em;
+  padding: 0.1em;
+}

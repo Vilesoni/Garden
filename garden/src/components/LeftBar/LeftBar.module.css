@@ -1,0 +1,10 @@
+.LeftBar {
+  background-image: url("./blured.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 1em;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}

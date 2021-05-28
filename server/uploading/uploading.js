@@ -6,7 +6,6 @@ const storage = multer.diskStorage({
     cb(null, `../garden/public/images`);
   },
   filename: (req, file, cb) => {
-    console.log(file);
     const fileName =
       path.parse(file.originalname.toString()).name +
       new Date().getMilliseconds() +

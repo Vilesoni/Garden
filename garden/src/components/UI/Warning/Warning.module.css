@@ -1,0 +1,21 @@
+.warning {
+  padding: 0.3em;
+  border-radius: 0.5em;
+  font-size: 0.9em;
+}
+.error {
+  border: 1px solid #f7a289;
+  color: #9a6556;
+  background-color: #f9b9a7;
+}
+.warn{
+  border: 1px solid #f7c389;
+  color: #9a6556;
+  background-color: #f9d2a7;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
