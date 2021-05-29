@@ -37,8 +37,22 @@ const getByQuery = (req, res, next) => {
   );
 };
 
+const getById = (req, res, next) => {
+  const articleId = req.body.articleId;
+  db.query(
+    `select * from articles_view where articleId='${articleId}'`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else [res.send(result)];
+    }
+  );
+};
+
+
 module.exports = {
   getByCategory,
   getByDate,
-  getByQuery
+  getByQuery,
+  getById
 };

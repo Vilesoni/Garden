@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import classes from "./RightSide.module.css";
 import ArticlesPreview from "./ArticlePreview/ArticlePreview";
-// import ArticleFull from "./ArticleFull/ArticleFull.jsx";
+import ArticleFull from "./ArticleFull/ArticleFull";
 // import Login from "./Login/Login.jsx";
 // import Logup from "./Logup/Logup.jsx";
 // import Profile from "./Profile/Profile.jsx";
@@ -22,9 +22,7 @@ const RightSide = () => {
         path={[`/`, "/category", "/results"]}
         render={() => <ArticlesPreview />}
       />
-      {/* <Route exact path={`/category`} render={() => <ArticlesPreview />} />
-      <Route exact path={`/results`} render={() => <ArticlesPreview />} /> */}
-      {/* <Route exact path={`/article`} render={() => <ArticleFull />} /> */}
+      <Route exact path={`/article`} render={() => <ArticleFull />} />
       {/* <Route exact path={`/login`} component={Login} />
       <Route exact path={`/logup`} component={Logup} /> */}
       {/* <Route

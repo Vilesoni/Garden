@@ -1,0 +1,20 @@
+.like {
+  display: grid;
+  grid-template-areas: "count img";
+  justify-content: right;
+  align-items: center;
+  align-content: center;
+  column-gap: 0.3em;
+}
+.like > img {
+  width: 24px;
+}
+.like > img:hover {
+  cursor: pointer;
+}
+.likesCount {
+  color: #00000081;
+}
+.noAuth{
+  pointer-events: none;
+}
