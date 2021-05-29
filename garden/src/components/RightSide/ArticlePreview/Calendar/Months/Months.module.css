@@ -1,0 +1,39 @@
+.Months{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 1.5em;
+  row-gap: 1.5em;
+  color: #767676;
+}
+.month{
+  color: #767676;
+  font-size: 1em;
+  display: grid;
+  align-content: center;
+  border-radius: .5em;
+  transition: all ease .3s;
+  padding: .3em;
+  border: 1px solid transparent;
+}
+.month:hover{
+  cursor: pointer;
+  background-color: #F5F5F5;
+  border: 1px solid #e1e1e1;
+}
+.month:active{
+  cursor: pointer;
+  background-color: #E9E9E9;
+  border: 1px solid #e1e1e1;
+}
+.month:focus-within{
+  background-color: #F5F5F5;
+  border: 1px solid #e1e1e1;
+}
+.img{
+  display: flex;
+  justify-content: center;
+}
+.img > img{
+  width: 32px
+}

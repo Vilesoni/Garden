@@ -3,6 +3,7 @@ import axios from "../../../axios/config";
 import classes from "./ArticlePreview.module.css";
 import ArticleInfo from "./ArticleInfo/ArticleInfo";
 import Search from "./Search/Search"
+import Calendar from "./Calendar/Calendar"
 
 function getURL() {
   switch (window.location.pathname) {
@@ -56,6 +57,7 @@ const ArticlePreview = () => {
   return (
     <div className={classes.ArticlePreview}>
       <Search />
+      <Calendar/>
       <div className={classes.title}>
         <p>Статьи</p>
       </div>

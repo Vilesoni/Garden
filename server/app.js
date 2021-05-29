@@ -7,6 +7,7 @@ const users = require("./tables/users");
 const articles = require("./tables/articles");
 const comments = require("./tables/comments");
 const likes = require("./tables/likes");
+const calendar = require("./tables/calendar");
 
 app.use(cors());
 app.use(express.json());
@@ -16,17 +17,20 @@ app.get("/api/categories/get-all", categories.getAll);
 app.get("/api/users/get-rating", users.getRating);
 app.get("/api/users/get-image", users.getRating);
 
-app.post("/api/articles/get-by-category", articles.getByCategory)
-app.post("/api/articles/get-by-date", articles.getByDate)
-app.post("/api/articles/get-by-query", articles.getByQuery)
-app.post("/api/articles/get-by-id", articles.getById)
+app.post("/api/articles/get-by-category", articles.getByCategory);
+app.post("/api/articles/get-by-date", articles.getByDate);
+app.post("/api/articles/get-by-query", articles.getByQuery);
+app.post("/api/articles/get-by-id", articles.getById);
 
-app.post("/api/comments/get-all", comments.getAll)
-app.post("/api/comments/add", comments.add)
+app.post("/api/comments/get-all", comments.getAll);
+app.post("/api/comments/add", comments.add);
 
-app.post("/api/likes/get-all", likes.getAll)
-app.post("/api/likes/add", likes.add)
-app.post("/api/likes/remove", likes.remove)
+app.post("/api/likes/get-all", likes.getAll);
+app.post("/api/likes/add", likes.add);
+app.post("/api/likes/remove", likes.remove);
+
+app.post("/api/calendar/get-cultures", calendar.getCultures);
+app.post("/api/calendar/get-days", calendar.getDays);
 
 app.post("/api/upload-images", uploading.upload.single("file"), uploading.get);
 

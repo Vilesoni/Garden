@@ -1,0 +1,58 @@
+.CalendarItem {
+  display: grid;
+  justify-content: center;
+  color: #767676;
+  margin-top: 0.5em;
+}
+.calendar {
+  display: grid;
+  grid-template-areas: "calendar description";
+  column-gap: 1em;
+}
+.calendarTable {
+  background-color: #f5f5f5;
+  border-radius: 0.5em;
+  border: 1px solid #e1e1e1;
+}
+.calendarTable:hover {
+  cursor: default;
+}
+.calendarTable td {
+  padding: 0.2em;
+  text-align: center;
+}
+.simple,
+.weekend {
+  font-weight: 700;
+}
+.weekend {
+  color: #404b45;
+}
+.descriptionTable {
+  align-items: center;
+}
+.color_good,
+.color_bad {
+  padding: 0 0.3em;
+  font-size: 1.5em;
+}
+.color_good {
+  color: #6fc98f;
+}
+.color_bad {
+  color: #c9a26f;
+}
+.faroble {
+  background-color: #6fc98e59;
+  border-radius: 0.5em;
+  color: #6fc98f;
+}
+.nofaroble {
+  background-color: #c9a26f59;
+  border-radius: 0.5em;
+  color: #c9a26f;
+}
+.current {
+  border-radius: 0.5em;
+  border: 1px solid #646464;
+}

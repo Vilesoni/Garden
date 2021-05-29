@@ -1,0 +1,23 @@
+.Cultures {
+  display: flex;
+  column-gap: 0.5em;
+  justify-content: center;
+  color: #767676;
+  margin: 1em 0;
+}
+.culture {
+  color: #767676;
+  background-color: #e1e1e1;
+  border-radius: 0.5em;
+  padding: .3em 1em;
+  transition: all ease .5s;
+  border: none;
+  font-size: .9em;
+  font-weight: 600;
+}
+.culture:hover,
+.culture:focus {
+  cursor: pointer;
+  border-radius: 1.5em;
+  background-color: #dadada;
+}

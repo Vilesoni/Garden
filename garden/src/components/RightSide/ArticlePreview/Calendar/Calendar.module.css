@@ -1,0 +1,18 @@
+.Calendar {
+  display: grid;
+  padding: 1em;
+  border-radius: 0.5em;
+  border: 1px solid #e1e1e1;
+  color: #767676;
+}
+.month {
+  font-weight: 600;
+  font-size: 1.3em;
+  text-align: center;
+}
+.closeContainer{
+  text-align: right;
+}
+.close:hover{
+  cursor: pointer;
+}
