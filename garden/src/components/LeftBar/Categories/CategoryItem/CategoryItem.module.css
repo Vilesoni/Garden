@@ -1,12 +1,12 @@
-.text{
+.text > a {
   background-color: #dfdfdf;
   border-radius: 1em;
-  padding: .1em .3em;
+  padding: 0.1em 0.3em;
   box-sizing: border-box;
-  color: #222b18;
+  color: #5f5f5f;
   border: 1px solid #e1e1e1;
+  font-weight: 600;
 }
-.text:hover{
-  text-decoration: underline;
-  cursor: pointer;
+.text > a:hover {
+  color: #424242;
 }

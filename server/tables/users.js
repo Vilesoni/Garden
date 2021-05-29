@@ -10,6 +10,17 @@ const getRating = (req, res, next) => {
   });
 };
 
+const getUserImg = (req, res, next) => {
+  db.query(`select imgPath from users`, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+};
+
 module.exports = {
     getRating,
+    getUserImg
 };

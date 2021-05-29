@@ -1,0 +1,31 @@
+.Info {
+  display: grid;
+  grid-template-areas:
+    "date date"
+    "img user";
+  grid-template-columns: 32px auto;
+  column-gap: 1em;
+  align-items: center;
+  color: #00000081;
+  font-size: 1em;
+  font-weight: 600;
+}
+.date {
+  grid-area: date;
+  font-size: 0.8em;
+}
+.img {
+  grid-area: img;
+  display: flex;
+  align-items: center;
+}
+.user {
+  grid-area: user;
+}
+.user > a{
+
+  color: #00000081;
+}
+.user:hover {
+  text-decoration: underline;
+}

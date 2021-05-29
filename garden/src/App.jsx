@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./App.module.css";
 import LeftBar from "./components/LeftBar/LeftBar";
-// import RightSide from "./components/RightSide/RightSide.jsx";
+import RightSide from "./components/RightSide/RightSide";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         <LeftBar />
       </div>
       <div className={classes.other}>
-        {/* <RightSide /> */}
+        <RightSide />
       </div>
     </div>
   );

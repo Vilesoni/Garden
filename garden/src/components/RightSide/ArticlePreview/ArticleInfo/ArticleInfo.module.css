@@ -1,0 +1,32 @@
+.ArticleInfo {
+  display: grid;
+  padding: 1em;
+  row-gap: .5em;
+  border-radius: 0.5em;
+  border: 1px solid #e1e1e1;
+  background-color: #f5f5f5;
+  color: #767676;
+}
+.articleTitle,
+.articlePreview {
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.articlePreview {
+  margin-top: 1em;
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 1.3em;
+}
+.articleMore{
+  display: grid;
+  justify-content: right;
+}
+.category{
+  color: #617c50;
+  background-color: #86a573b6;
+  border-radius: 1em;
+  padding: 0.1em 1em;
+  text-align: center;
+  font-size: .9em;
+}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Img from "../Img";
-import axios from "../axios/config";
+import axios from "../../axios/config";
 import classes from "./UploadFiles.module.css";
 
 const UploadImage = () => {
