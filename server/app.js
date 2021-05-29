@@ -25,6 +25,8 @@ app.post("/api/comments/get-all", comments.getAll)
 app.post("/api/comments/add", comments.add)
 
 app.post("/api/likes/get-all", likes.getAll)
+app.post("/api/likes/add", likes.add)
+app.post("/api/likes/remove", likes.remove)
 
 app.post("/api/upload-images", uploading.upload.single("file"), uploading.get);
 

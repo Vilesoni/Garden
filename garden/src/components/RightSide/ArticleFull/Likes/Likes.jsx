@@ -31,9 +31,9 @@ const Likes = (props) => {
     }
   };
   const AddDeleteLike = async (state) => {
-    let action = state ? "set" : "unset";
+    let action = state ? "add" : "remove";
     try {
-      await axios.post(`/api/article/like/${action}`, {
+      await axios.post(`/api/likes/${action}`, {
         articleId: props.articleId,
         userId: userId,
       });
