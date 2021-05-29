@@ -15,7 +15,7 @@ app.use(express.json());
 app.get("/api/categories/get-all", categories.getAll);
 
 app.get("/api/users/get-rating", users.getRating);
-app.get("/api/users/get-image", users.getRating);
+app.post("/api/users/login", users.login);
 
 app.post("/api/articles/get-by-category", articles.getByCategory);
 app.post("/api/articles/get-by-date", articles.getByDate);

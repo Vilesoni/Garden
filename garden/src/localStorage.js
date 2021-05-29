@@ -1,8 +1,12 @@
-const setUser = (id) => {
-  window.localStorage.setItem("user", id);
+const setUser = (id, login, imgPath, admin) => {
+  const user = [id, login, imgPath, admin];
+  window.localStorage.setItem("user", JSON.stringify(user));
 };
 const getUser = () => {
-  return window.localStorage.getItem("user");
+  const user = window.localStorage.getItem("user");
+  if (user !== null) {
+    return eval(user).join(",").split(",");
+  }
 };
 const deleteUser = () => {
   window.localStorage.removeItem("user");
