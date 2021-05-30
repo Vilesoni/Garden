@@ -5,15 +5,11 @@ import ArticlesPreview from "./ArticlePreview/ArticlePreview";
 import ArticleFull from "./ArticleFull/ArticleFull";
 import Login from "./Login/Login";
 // import Logup from "./Logup/Logup.jsx";
-// import Profile from "./Profile/Profile.jsx";
+import Profile from "./Profile/Profile";
 // import ProfileEntered from "./ProfileEntered/ProfileEntered.jsx";
 // import ArticleAdd from "./ArticleAdd/ArticleAdd.jsx";
 // import ProfileEdit from "./ProfileEdit/ProfileEdit.jsx";
 
-function getURLid() {
-  let url = new URL(window.location.href);
-  return url.searchParams.get("id");
-}
 const RightSide = () => {
   return (
     <div className={classes.RightSide}>
@@ -26,11 +22,8 @@ const RightSide = () => {
       <Route exact path={`/login`} component={Login} />
       {/* 
       <Route exact path={`/logup`} component={Logup} /> */}
-      {/* <Route
-        exact
-        path={`/profile`}
-        render={() => <Profile userId={getURLid()} />}
-      />
+      <Route exact path={`/profile`} component={Profile} />
+      {/* 
       <Route
         exact
         path={`/profile/user`}

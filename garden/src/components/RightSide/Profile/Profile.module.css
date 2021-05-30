@@ -1,0 +1,38 @@
+.Profile {
+  display: grid;
+  row-gap: 1em;
+  padding: 1em;
+  border-radius: 0.5em;
+  border: 1px solid #e1e1e1;
+  color: #676767;
+}
+.nav{
+  margin: 1em 0 .5em 0;
+  display: flex;
+  border-bottom: 1px solid #e1e1e1;
+  column-gap: 5em;
+}
+.title, .navLink {
+  font-size: 1.2em;
+  font-weight: 600;
+  text-indent: .5em;
+  width: 100%;
+}
+.navLink:hover{
+  border: none;
+  cursor: pointer;
+  color: #424242;
+}
+.add{
+  font-size: 1.2em;
+  font-weight: 700;
+  padding: 0 .4em;
+  background-color: #e1e1e1;
+  border-radius: 1.5em;
+  margin-left: .3em;
+  transition: all ease .3s;
+}
+.add:hover{
+  cursor: pointer;
+  background-color: #d8d8d8;
+}

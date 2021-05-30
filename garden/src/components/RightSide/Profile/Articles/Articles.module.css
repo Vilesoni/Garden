@@ -1,0 +1,35 @@
+.Articles {
+  display: grid;
+  row-gap: 0.5em;
+  color: #767676;
+}
+.article {
+  padding: 1em;
+  border: 1px solid #e1e1e1;
+  border-radius: 0.5em;
+  background-color: #f5f5f5;
+  display: grid;
+}
+.title {
+  color: #767676;
+  font-size: 1.5em;
+  font-weight: 600;
+  transition: all ease 0.3s;
+}
+.title:hover {
+  color: #3b3b3b;
+}
+.info {
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}
+.category {
+  color: #617c50;
+  background-color: #86a573b6;
+  border-radius: 1em;
+  padding: 0.1em 1em;
+  text-align: center;
+}
+.warning{
+  text-align: center;
+}

@@ -22,13 +22,13 @@ const Login = (props) => {
       })
       .then((response) => {
         if (response.data.length !== 0) {
-          props.history.push(`/profile/user?id=${response.data[0].id}`);
+          props.history.push(`/profile?id=${response.data[0].id}`);
           localStorage.setUser(
             response.data[0].id,
             response.data[0].login,
             response.data[0].imgPath,
             response.data[0].admin
-          );          
+          );
         } else {
           Warn("Проверьте имя пользователя или пароль", "error", "show");
         }

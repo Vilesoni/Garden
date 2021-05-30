@@ -1,0 +1,45 @@
+.UserInfo {
+  color: #767676;
+}
+.UserInfo > div {
+  display: grid;
+  grid-template-columns: 100px auto 24px;
+  column-gap: 1em;
+}
+.pic {
+  display: flex;
+  align-items: center;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.5em;
+}
+.rating {
+  color: #617c50;
+  background-color: #86a573b6;
+  border-radius: 1em;
+  padding: 0 1em;
+  text-align: center;
+}
+.login {
+  display: grid;
+  grid-template-columns: max-content 30px;
+  align-items: center;
+  column-gap: 0.3em;
+}
+.img {
+  width: 24px;
+  height: 24px;
+  transition: all ease 0.5s;
+  padding: 0.3em;
+}
+.img:hover {
+  background-color: #e1e1e1;
+  border-radius: 1em;
+  cursor: pointer;
+}
+.img:active {
+  background-color: #d3d3d3;
+}

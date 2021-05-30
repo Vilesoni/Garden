@@ -8,10 +8,15 @@
   color: #9a6556;
   background-color: #f9b9a7;
 }
-.warn{
+.warn {
   border: 1px solid #f7c389;
   color: #9a6556;
   background-color: #f9d2a7;
+}
+.info {
+  border: 1px solid #adc2eb;
+  color: #24478f;
+  background-color: #d6e0f5;
 }
 .hide {
   display: none;

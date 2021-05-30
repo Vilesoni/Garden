@@ -11,8 +11,8 @@ import string from "../../../../string";
 
 const Search = () => {
   const [query, setQuery] = useState("");
-  const userId = localStorage.getUser()[0];
-  const userImg = localStorage.getUser()[2];
+  const userId = localStorage.getUserId();
+  const userImg = localStorage.getUserImg();
   useEffect(() => {
     const location = window.location.pathname;
     if (location === "/" || location === "/category") {
@@ -40,11 +40,11 @@ const Search = () => {
       </div>
       {userId === null ? (
         <Link to="/login">
-          <Button text="Войти" type="green" />
+          <Button text="Войти" color="blue" />
         </Link>
       ) : (
         <Tooltip arrow title="Перейти в профиль">
-          <Link to={`/profile/user?id=${userId}`}>
+          <Link to={`/profile?id=${userId}`}>
             <div className={classes.userProfile}>
               {userImg != null ? (
                 <Pic size="small" src={userImg} />
