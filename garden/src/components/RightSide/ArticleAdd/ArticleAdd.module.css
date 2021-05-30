@@ -1,0 +1,10 @@
+.ArticleAdd {
+  display: grid;
+  row-gap: .3em;
+  padding: 1em;
+  border-radius: 0.5em;
+  border: 1px solid #e1e1e1;
+}
+.btn_container{
+  margin-top: 1em;
+}

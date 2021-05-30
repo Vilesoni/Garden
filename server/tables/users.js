@@ -71,10 +71,46 @@ const login = (req, res, next) => {
   );
 };
 
+const logup = (req, res, next) => {
+  const login = req.body.login;
+  const email = req.body.email;
+  const password = req.body.password;
+  db.query(
+    `call logup('${login}','${email}','${password}', @inserted)`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        db.query(`select @inserted as inserted`, (err, result) => {
+          if (err) {
+            res.send(err);
+          } else {
+            if (result[0].inserted === 1) {
+              db.query(
+                `select id from users where login='${login}'`,
+                (err, result) => {
+                  if (err) {
+                    res.send(err);
+                  } else {
+                    res.send(result);
+                  }
+                }
+              );
+            } else {
+              res.send(result);
+            }
+          }
+        });
+      }
+    }
+  );
+};
+
 module.exports = {
   getRating,
   login,
+  logup,
   getById,
   getByIdArticles,
-  getByIdArticlesLiked
+  getByIdArticlesLiked,
 };

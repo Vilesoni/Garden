@@ -49,10 +49,28 @@ const getById = (req, res, next) => {
   );
 };
 
-
+const add = (req, res, next) => {
+  const userId = req.body.userId;
+  const title = req.body.title;
+  const preview = req.body.preview;
+  const content = req.body.content;
+  const category = req.body.category;
+  const imgPath = req.body.imgPath;
+  db.query(
+    `insert into articles (userId, title, preview, content, categoryId, imgPath)
+    values('${userId}','${title}','${preview}',
+    '${content}','${category}','${imgPath}')`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else [res.send(result)];
+    }
+  );
+};
 module.exports = {
   getByCategory,
   getByDate,
   getByQuery,
-  getById
+  getById,
+  add
 };

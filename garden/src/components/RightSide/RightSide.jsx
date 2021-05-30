@@ -4,10 +4,9 @@ import classes from "./RightSide.module.css";
 import ArticlesPreview from "./ArticlePreview/ArticlePreview";
 import ArticleFull from "./ArticleFull/ArticleFull";
 import Login from "./Login/Login";
-// import Logup from "./Logup/Logup.jsx";
+import Logup from "./Logup/Logup.jsx";
 import Profile from "./Profile/Profile";
-// import ProfileEntered from "./ProfileEntered/ProfileEntered.jsx";
-// import ArticleAdd from "./ArticleAdd/ArticleAdd.jsx";
+import ArticleAdd from "./ArticleAdd/ArticleAdd";
 // import ProfileEdit from "./ProfileEdit/ProfileEdit.jsx";
 
 const RightSide = () => {
@@ -20,16 +19,10 @@ const RightSide = () => {
       />
       <Route exact path={`/article`} render={() => <ArticleFull />} />
       <Route exact path={`/login`} component={Login} />
-      {/* 
-      <Route exact path={`/logup`} component={Logup} /> */}
+      <Route exact path={`/logup`} component={Logup} /> 
       <Route exact path={`/profile`} component={Profile} />
+      <Route exact path={`/create/article`} component={ArticleAdd} />
       {/* 
-      <Route
-        exact
-        path={`/profile/user`}
-        render={() => <ProfileEntered />}
-      />
-      <Route exact path={`/article/add`} render={() => <ArticleAdd />} />
       <Route
         exact
         path={`/profile/edit`}

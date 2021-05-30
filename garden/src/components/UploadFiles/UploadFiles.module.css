@@ -1,0 +1,38 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 0;
+  color: #767676;
+}
+.previewImg {
+  border-radius: 0.5em;
+  width: 30%;
+  height: 30%;
+}
+.input {
+  display: none;
+}
+.upload {
+  margin-bottom: 0.3em;
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+}
+.upload label {
+  color: #767676;
+  border-radius: 0.5em;
+  border: 3px dotted #e1e1e1;
+  padding: 0.5em;
+  display: block;
+  text-align: center;
+  user-select: none;
+}
+.upload label:hover {
+  border: 3px dotted #d6d6d6;
+}
+.upload label:hover {
+  color: #424242;
+  cursor: pointer;
+}
