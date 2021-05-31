@@ -74,9 +74,9 @@ const Login = (props) => {
           <Link to="/logup">
             <p className={classes.logup}>Нет аккаунта? Зарегистрироваться</p>
           </Link>
-          <Link to="/recover">
+          {/* <Link to="/recover">
             <p className={classes.logup}>Забыли пароль?</p>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

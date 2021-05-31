@@ -25,6 +25,7 @@ const Editor = (props) => {
       <div className={classes.edit_view}>
         <div className={classes.textarea}>
           <textarea
+            rows="10"
             placeholder="Начните писать..."
             value={text}
             onChange={(e) => {

@@ -3,11 +3,11 @@
   padding: 1em;
   border-radius: 0.5em;
   border: 1px solid #e1e1e1;
-  color: #00000081;
+  color: #767676;
 }
 .user_info {
   display: grid;
-  justify-content: center;
+  margin: 0 15em;
   row-gap: 1em;
 }
 .info {
@@ -17,6 +17,7 @@
   row-gap: 1em;
 }
 .input {
+  width: 100%;
   padding: 0.5em;
   border-radius: 0.5em;
   border: 1px solid transparent;

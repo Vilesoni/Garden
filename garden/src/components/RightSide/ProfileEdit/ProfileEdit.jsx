@@ -32,7 +32,8 @@ const ProfileEdit = (props) => {
       string.isEmpty(result.data[0].fullName)
         ? setFullName("")
         : setFullName(result.data[0].fullName);
-        setUserImg(result.data[0].imgPath)
+        setUserImg(result.data[0].imgPath);
+        setImg(result.data[0].imgPath);
     } catch (error) {
       console.error(error.message);
     }
@@ -102,10 +103,10 @@ const ProfileEdit = (props) => {
                 if (!string.isLogin(login)) {
                   setWarning("Неверное имя пользователя");
                 }
-                if (!string.isName(fullName)) {
+                if (!string.isName(fullName) && !string.isEmpty(fullName)) {
                   setWarning("Фамилия имя введены неверно");
                 }
-                if (string.isLogin(login) && string.isName(fullName)) {
+                if (string.isLogin(login)) {
                   editUser(userId, login, fullName, img);
                 }
               } else {

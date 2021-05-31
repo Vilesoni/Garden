@@ -2,15 +2,16 @@ import React from "react";
 import classes from "./Pic.module.css";
 import avatar from "./default.png";
 const Pic = (props) => {
-  const errUrl = avatar
+  const errUrl = avatar;
   const src = props.src === null ? avatar : `/images/${props.src}`;
-  const cls = [classes.img, classes[props.size]];
+  const cls = [classes.container, classes[props.size]];
   return (
-    <div className={classes.container}>
+    <div className={cls.join(" ")}>
       <img
-        className={cls.join(" ")}
         src={src}
-        onError={(e) => {e.target.src=errUrl}}
+        onError={(e) => {
+          e.target.src = errUrl;
+        }}
         alt=""
       />
     </div>
