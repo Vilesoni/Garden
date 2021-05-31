@@ -25,8 +25,13 @@ const Logup = (props) => {
       })
       .then((response) => {
         if (isNaN(response.data[0].inserted)) {
+          localStorage.setUser(
+            response.data[0].id,
+            response.data[0].login,
+            response.data[0].imgPath,
+            response.data[0].admin
+          );
           props.history.push(`/profile?id=${response.data[0].id}`);
-          localStorage.setUser("user");
         } else {
           Warn("Такой пользователь уже существует.", "warn", "show");
         }

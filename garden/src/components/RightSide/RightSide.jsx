@@ -7,7 +7,7 @@ import Login from "./Login/Login";
 import Logup from "./Logup/Logup.jsx";
 import Profile from "./Profile/Profile";
 import ArticleAdd from "./ArticleAdd/ArticleAdd";
-// import ProfileEdit from "./ProfileEdit/ProfileEdit.jsx";
+import ProfileEdit from "./ProfileEdit/ProfileEdit";
 
 const RightSide = () => {
   return (
@@ -19,15 +19,10 @@ const RightSide = () => {
       />
       <Route exact path={`/article`} render={() => <ArticleFull />} />
       <Route exact path={`/login`} component={Login} />
-      <Route exact path={`/logup`} component={Logup} /> 
+      <Route exact path={`/logup`} component={Logup} />
       <Route exact path={`/profile`} component={Profile} />
       <Route exact path={`/create/article`} component={ArticleAdd} />
-      {/* 
-      <Route
-        exact
-        path={`/profile/edit`}
-        render={() => <ProfileEdit userId={getURLid()} />}
-      /> */}
+      <Route exact path={`/profile/edit`} render={() => <ProfileEdit />} />
     </div>
   );
 };

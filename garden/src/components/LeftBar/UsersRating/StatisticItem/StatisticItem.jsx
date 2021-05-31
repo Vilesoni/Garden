@@ -9,7 +9,7 @@ const StatisticItem = (props) => {
     <div className={classes.StatisticItem}>
       <div className={classes.img}>
         {imgPath !== null ? (
-          <Pic size="small" src={`/images/${imgPath}`} />
+          <Pic size="small" src={`${imgPath}`} />
         ) : (
           <Pic size="small" src="" />
         )}

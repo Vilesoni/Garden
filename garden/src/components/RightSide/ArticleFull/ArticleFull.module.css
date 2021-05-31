@@ -23,10 +23,15 @@
 }
 .articlePic {
   margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .img {
   width: 70%;
   height: 70%;
+  border-radius: .5em;
+  box-sizing: border-box;
 }
 .none {
   display: none;

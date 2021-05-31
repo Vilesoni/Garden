@@ -87,7 +87,8 @@ const logup = (req, res, next) => {
           } else {
             if (result[0].inserted === 1) {
               db.query(
-                `select id from users where login='${login}'`,
+                `select id, login, imgPath, admin 
+                from users where login='${login}'`,
                 (err, result) => {
                   if (err) {
                     res.send(err);
@@ -106,10 +107,34 @@ const logup = (req, res, next) => {
   );
 };
 
+const edit = (req, res, next) => {
+  const userId = req.body.userId;
+  const login = req.body.login;
+  const fullName = req.body.fullName;
+  const imgPath = req.body.imgPath;
+  db.query(
+    `call edit('${userId}','${login}','${fullName}','${imgPath}', @edited)`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        db.query(`select @edited as edited`, (err, result) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.send(result);
+          }
+        });
+      }
+    }
+  );
+};
+
 module.exports = {
   getRating,
   login,
   logup,
+  edit,
   getById,
   getByIdArticles,
   getByIdArticlesLiked,

@@ -18,7 +18,7 @@ const getUserImg = () => {
   return getUser().length === 0 ? null : getUser()[2];
 };
 const deleteUser = () => {
-  window.localStorage.removeItem("user");
+  window.localStorage.clear();
 };
 module.exports = {
   setUser,

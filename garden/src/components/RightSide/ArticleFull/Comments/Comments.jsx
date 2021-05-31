@@ -13,19 +13,17 @@ const Comments = (props) => {
   const [comments, setComments] = useState([]);
   const [send, setSend] = useState(false);
   const [content, setContent] = useState("");
-  const userId = localStorage.getUser();
+  const userId = localStorage.getUser()[0];
   useEffect(() => {
     fetchData();
   }, [send]);
   const fetchData = async () => {
     try {
-      const result = await axios.post(
-        "/api/comments/get-all",
-        {
-          articleId: props.articleId,
-        }
-      );
+      const result = await axios.post("/api/comments/get-all", {
+        articleId: props.articleId,
+      });
       setComments(result.data);
+      setSend(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -37,10 +35,14 @@ const Comments = (props) => {
         articleId: props.articleId,
         userId: userId,
       });
-      setSend(false);
+      setSend(true);
+      setContent("");
     } catch (error) {
       console.error(error.message);
     }
+  };
+  const onChange = (e) => {
+    setContent(e.target.value);
   };
   return (
     <div className={classes.Comments}>
@@ -56,7 +58,7 @@ const Comments = (props) => {
         </div>
       ))}
       <div className={classes.comment_wrapper}>
-        {userId === null ? (
+        {isNaN(userId) ? (
           <Warning
             text="Чтобы оставлять комментарии необходимо авторизоваться."
             display="show"
@@ -67,22 +69,10 @@ const Comments = (props) => {
             <Textarea
               value={content}
               placeholder="Комментарий"
-              onChange={(event) => {
-                setContent(event.target.value);
-              }}
+              onChange={onChange}
             />
             <Tooltip arrow title="Отправить">
-              <img
-                className={classes.send}
-                src={sent}
-                onClick={() => {
-                  if (!string.isEmpty(content)) {
-                    setContent("");
-                    setSend(true);
-                    Add();
-                  }
-                }}
-              />
+              <img className={classes.send} src={sent} onClick={Add} />
             </Tooltip>
           </div>
         )}

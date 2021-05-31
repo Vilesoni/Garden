@@ -4,7 +4,25 @@ import classes from "./UploadFiles.module.css";
 const UploadFiles = (props) => {
   const [fileName, setFileName] = useState(null);
   const [filePath, setFilePath] = useState(null);
-  async function upload(file) {
+  const checkFile = (file) => {
+    const extensions = ["image/jpeg", "image/png", "video/mp4"];
+    if (extensions.includes(file.type.toString())) {
+      return true;
+    }
+    return false;
+  };
+  const remove = () => {
+    if (fileName !== null) {
+      try {
+        axios.post("/api/delete-images", {
+          fileName: fileName,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  const upload = async (file) => {
     if (file !== null && checkFile(file)) {
       try {
         remove();
@@ -24,25 +42,7 @@ const UploadFiles = (props) => {
         console.error(error.message);
       }
     }
-    function remove() {
-      if (fileName !== null) {
-        try {
-          axios.post("/api/delete-images", {
-            fileName: fileName,
-          });
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    }
-    function checkFile(file) {
-      const extensions = ["image/jpeg", "image/png", "video/mp4"];
-      if (extensions.includes(file.type.toString())) {
-        return true;
-      }
-      return false;
-    }
-  }
+  };
   return (
     <div>
       <div className={classes.upload}>
@@ -65,7 +65,7 @@ const UploadFiles = (props) => {
       </div>
       {filePath !== null ? (
         <div className={classes.preview}>
-          <img className={classes.previewImg} src={filePath} alt=""/>
+          <img className={classes.previewImg} src={filePath} alt="" />
         </div>
       ) : (
         false

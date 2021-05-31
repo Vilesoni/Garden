@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import classes from "./Pic.module.css";
 import avatar from "./default.png";
 const Pic = (props) => {
-  const [src, setSrc] = useState(avatar);
-  useEffect(() => {
-    setSrc(props.src);
-  }, []);
-  const cls = [classes.button, classes[props.size]];
+  const errUrl = avatar
+  const src = props.src === null ? avatar : `/images/${props.src}`;
+  const cls = [classes.img, classes[props.size]];
   return (
     <div className={classes.container}>
-      <img className={cls.join(" ")} src={src} onError={() => setSrc(avatar)} alt=""/>
+      <img
+        className={cls.join(" ")}
+        src={src}
+        onError={(e) => {e.target.src=errUrl}}
+        alt=""
+      />
     </div>
   );
 };

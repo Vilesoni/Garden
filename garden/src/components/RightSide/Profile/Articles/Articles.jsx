@@ -20,6 +20,11 @@ const Articles = (props) => {
   };
   return (
     <div className={classes.Articles}>
+      {articles.length === 0 ? (
+        <div className={classes.warning}>Вам еще ничего не понравилось &#128542;</div>
+      ) : (
+        false
+      )}
       {articles.map((item, index) =>
         item.articleId === null ? (
           <div key={index} className={classes.warning}>

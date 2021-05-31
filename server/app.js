@@ -17,6 +17,7 @@ app.get("/api/categories/get-all", categories.getAll);
 app.get("/api/users/get-rating", users.getRating);
 app.post("/api/users/login", users.login);
 app.post("/api/users/logup", users.logup);
+app.post("/api/users/edit", users.edit);
 app.post("/api/users/get-by-id", users.getById);
 app.post("/api/users/get-by-id-articles", users.getByIdArticles);
 app.post("/api/users/get-by-id-articles-liked", users.getByIdArticlesLiked);
