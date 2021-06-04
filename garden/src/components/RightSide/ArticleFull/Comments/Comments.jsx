@@ -13,7 +13,7 @@ const Comments = (props) => {
   const [comments, setComments] = useState([]);
   const [send, setSend] = useState(false);
   const [content, setContent] = useState("");
-  const userId = localStorage.getUser()[0];
+  const userId = localStorage.getUserId();
   useEffect(() => {
     fetchData();
   }, [send]);

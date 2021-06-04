@@ -62,7 +62,7 @@ const ProfileEdit = (props) => {
     <div className={classes.ProfileEntered}>
       <div className={classes.back}>
         <Link to={`/profile?id=${userId}`}>
-          <Tooltip title="Назад">
+          <Tooltip arrow title="Назад">
             <img src={back} />
           </Tooltip>
         </Link>
@@ -71,7 +71,7 @@ const ProfileEdit = (props) => {
         <div className={classes.pic}>
           <Pic src={userImg} size="huge" />
         </div>
-        <UploadFiles update={UploadUpdate} />
+        <UploadFiles update={UploadUpdate} accept=".jpg,.png"/>
         <div className={classes.info}>
           <input
             className={classes.input}

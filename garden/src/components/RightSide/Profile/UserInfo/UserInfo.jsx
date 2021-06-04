@@ -33,7 +33,7 @@ const UserInfo = (props) => {
           <div className={classes.info}>
             <div className={classes.login}>
               {item.login}
-              {props.userId === localStorage.getUser()[0] ? (
+              {props.userId === localStorage.getUserId()? (
                 <div className={classes.edit}>
                   <Link to={`/profile/edit?id=${props.userId}`}>
                     <Tooltip arrow title="Редактировать профиль">
@@ -52,7 +52,7 @@ const UserInfo = (props) => {
             <div className={classes.fullName}>{item.fullName}</div>
           </div>
           <div className={classes.exit}>
-            {props.userId === localStorage.getUser()[0] ? (
+            {props.userId === localStorage.getUserId() ? (
               <Link to="/">
                 <Tooltip title="Выйти" arrow>
                   <img

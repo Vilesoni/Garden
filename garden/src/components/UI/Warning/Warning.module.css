@@ -2,6 +2,7 @@
   padding: 0.3em;
   border-radius: 0.5em;
   font-size: 0.9em;
+  transition: all ease .5s;
 }
 .error {
   border: 1px solid #f7a289;
@@ -17,6 +18,11 @@
   border: 1px solid #adc2eb;
   color: #24478f;
   background-color: #d6e0f5;
+}
+.success{
+  border: 1px solid #9fdf9f;
+  color: #2d862d;
+  background-color: #c6ecc6;
 }
 .hide {
   display: none;

@@ -1,17 +1,12 @@
-.preview {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 1em 0;
-  color: #767676;
-}
-.previewImg {
-  border-radius: 0.5em;
-  width: 30%;
-  height: 30%;
+.FileUpload{
+  transition: all ease .5s;
+  display: grid;
+  row-gap: .3em;
 }
 .input {
+  display: none;
+}
+.uploadNone{
   display: none;
 }
 .upload {
@@ -19,6 +14,7 @@
   position: relative;
   overflow: hidden;
   font-weight: 600;
+  transition: all ease .5s;
 }
 .upload label {
   color: #767676;
@@ -35,4 +31,8 @@
 .upload label:hover {
   color: #424242;
   cursor: pointer;
+}
+.video{
+  width: 100%;
+  border: .5em;
 }

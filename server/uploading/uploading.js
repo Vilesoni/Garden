@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     cb(null, fileName.toString());
   },
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage});
 const get = (req, res, next) => {
   res.send(req.file.filename);
 };

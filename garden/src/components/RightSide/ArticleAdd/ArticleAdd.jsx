@@ -19,7 +19,7 @@ const ArticleAdd = (props) => {
   const [html, setHtml] = useState("");
   const [warnDisplay, setWarnDisplay] = useState("hide");
   const [warnText, setWarnText] = useState("");
-  const userId = localStorage.getUser()[0];
+  const userId = localStorage.getUserId();
   function EditorUpdate(value, html, warn) {
     setContent(value);
     setHtml(html);
@@ -75,7 +75,7 @@ const ArticleAdd = (props) => {
     }
   };
   return (
-    <div className={classes.ArticleAdd}>
+    <div >
       {isNaN(userId) ? (
         <Warning
           text="У вас нет доступа к данной странице"
@@ -83,7 +83,7 @@ const ArticleAdd = (props) => {
           type="info"
         />
       ) : (
-        <div>
+        <div className={classes.ArticleAdd}>
           <Categories update={CategoryUpdate} />
           <div className={classes.preview}>
             <Textarea
@@ -94,7 +94,7 @@ const ArticleAdd = (props) => {
               }}
             />
           </div>
-          <UploadFile update={UploadUpdate} extensions=".png,.jpg,.mp4" />
+          <UploadFile accept=".jpg,.png,.mp4" folder="articles"/>
           <div className={classes.content}>
             <Editor update={EditorUpdate} />
           </div>

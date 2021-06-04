@@ -13,7 +13,7 @@ function getURLid() {
   return url.searchParams.get("id");
 }
 const Profile = (props) => {
-  const userId = getURLid();
+  const userId = parseInt(getURLid());
   const [url, setUrl] = useState("/api/users/get-by-id-articles");
   const [exist, setExist] = useState(false);
   const [display, setDisplay] = useState("hide");
@@ -41,7 +41,7 @@ const Profile = (props) => {
         <div>
           <UserInfo userId={userId} />
           <div className={classes.nav}>
-            {localStorage.getUser()[0] === userId ? (
+            {localStorage.getUserId() === userId ? (
               <div onClick={() => setUrl("/api/users/get-by-id-articles")}>
                 <span className={classes.navLink}>Мои статьи</span>
                 <Tooltip arrow title="Создать статью">
@@ -53,7 +53,7 @@ const Profile = (props) => {
             ) : (
               <div className={classes.title}>Статьи</div>
             )}
-            {localStorage.getUser()[0] === userId ? (
+            {localStorage.getUserId() === userId ? (
               <div
                 onClick={() => setUrl("/api/users/get-by-id-articles-liked")}
               >

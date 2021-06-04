@@ -9,7 +9,7 @@ const mdParser = new MarkdownIt();
 
 const ArticleFull = () => {
   const [article, setArticle] = useState([]);
-  const [imgClass, setImgClass] = useState("img");
+  const [imgClass, setImgClass] = useState("articlePic");
   const articleId = new URL(window.location.href).searchParams.get("id");
   useEffect(() => {
     fetchData();
@@ -36,10 +36,10 @@ const ArticleFull = () => {
               img={item.imgPathUser}
               userName={item.login}
             />
-            <div className={classes.articlePic}>
+            <div className={classes[imgClass]}>
               {item.imgPathArticle != null ? (
                 <img
-                  className={classes[imgClass]}
+                  className={classes.img}
                   src={`/images/${item.imgPathArticle}`}
                   alt=""
                   onError={() => setImgClass("none")}
