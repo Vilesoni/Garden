@@ -20,3 +20,8 @@ ul,
 ol {
   margin: 0 1em;
 }
+blockquote{
+  background-color: #E9E9E9;
+  padding: .5em 1em;
+  border-left: 3px solid #cccccc;
+}

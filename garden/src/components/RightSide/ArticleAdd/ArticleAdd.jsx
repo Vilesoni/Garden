@@ -12,70 +12,15 @@ import localStorage from "../../../localStorage.js";
 import string from "../../../string.js";
 
 const ArticleAdd = (props) => {
-  const [category, setCategory] = useState(0);
-  const [preview, setPreview] = useState("");
-  const [content, setContent] = useState("");
-  const [file, setFile] = useState("");
-  const [html, setHtml] = useState("");
-  const [warnDisplay, setWarnDisplay] = useState("hide");
-  const [warnText, setWarnText] = useState("");
   const userId = localStorage.getUserId();
-  function EditorUpdate(value, html, warn) {
-    setContent(value);
-    setHtml(html);
-    setWarnDisplay(warn);
-  }
-  function CategoryUpdate(value) {
-    setCategory(value);
-    setWarnDisplay("hide");
-  }
-  function UploadUpdate(fileName) {
-    setFile(fileName);
-  }
-  function GetTitle() {
-    var tmp = html.match("<h1>(.*)</h1>");
-    if (tmp !== null) {
-      console.log(tmp[1]);
-      return tmp[1];
-    }
-    return false;
-  }
-  function GetContent() {
-    var length = GetTitle().length + 6;
-    if (length !== null) {
-      return content.substr(length);
-    }
-    return false;
-  }
-  function Check(param) {
-    switch (param) {
-      case string.isEmpty(param):
-      case param === 0:
-        setWarnDisplay("show");
-        setWarnText("Все поля обязательны для заполнения");
-        return false;
-      default:
-        setWarnDisplay("hide");
-        return true;
-    }
-  }
-  const Add = async () => {
-    try {
-      const result = await axios.post("/api/articles/add", {
-        userId: userId,
-        title: GetTitle(),
-        preview: preview,
-        content: GetContent(),
-        category: category,
-        imgPath: file,
-      });
-      if (result.data.length != 0) props.history.push(`/profile?id=${userId}`);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  const [warn, setWarn] = useState({
+    text: "",
+    type: "",
+    display: "hide",
+  });
+  const [preview, setPreview] = useState("");
   return (
-    <div >
+    <div>
       {isNaN(userId) ? (
         <Warning
           text="У вас нет доступа к данной странице"
@@ -84,36 +29,21 @@ const ArticleAdd = (props) => {
         />
       ) : (
         <div className={classes.ArticleAdd}>
-          <Categories update={CategoryUpdate} />
+          <Categories />
           <div className={classes.preview}>
             <Textarea
+              value={preview}
               placeholder="Краткое содержание"
-              onChange={(e) => {
-                setPreview(e.target.value);
-                setWarnDisplay("hide");
-              }}
+              onChange={(e) => setPreview(e.target.value)}
             />
           </div>
-          <UploadFile accept=".jpg,.png,.mp4" folder="articles"/>
+          <UploadFile accept=".jpg,.png,.mp4" folder="articles" />
           <div className={classes.content}>
-            <Editor update={EditorUpdate} />
+            <Editor />
           </div>
-          <Warning text={warnText} display={warnDisplay} type="error" />
+          <Warning text={warn.text} display={warn.display} type={warn.type} />
           <div className={classes.btn_container}>
-            <Button
-              text="Опубликовать"
-              color="blue"
-              onClick={() => {
-                if (
-                  Check(GetTitle()) &&
-                  Check(GetContent()) &&
-                  Check(preview) &&
-                  Check(category)
-                ) {
-                  Add();
-                }
-              }}
-            />
+            <Button text="Опубликовать" color="blue" onClick={() => {}} />
           </div>
         </div>
       )}

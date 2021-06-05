@@ -36,18 +36,18 @@ const ArticleFull = () => {
               img={item.imgPathUser}
               userName={item.login}
             />
-            <div className={classes[imgClass]}>
-              {item.imgPathArticle != null ? (
+            {item.imgPathArticle !== null ? (
+              <div className={classes[imgClass]}>
                 <img
                   className={classes.img}
                   src={`/images/${item.imgPathArticle}`}
                   alt=""
                   onError={() => setImgClass("none")}
                 />
-              ) : (
-                false
-              )}
-            </div>
+              </div>
+            ) : (
+              false
+            )}
             <div
               className={classes.content}
               dangerouslySetInnerHTML={{

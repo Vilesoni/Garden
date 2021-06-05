@@ -11,7 +11,9 @@ const ProfileLink = () => {
   const userId = localStorage.getUserId();
   const [userImg, setUserImg] = useState(null);
   useEffect(() => {
-    fetchData();
+    if (userId) {
+      fetchData();
+    }
   }, []);
   const fetchData = async () => {
     try {
@@ -30,16 +32,16 @@ const ProfileLink = () => {
           <Button text="Войти" color="blue" />
         </Link>
       ) : (
-        <Tooltip arrow title="Перейти в профиль">
-          <Link to={`/profile?id=${userId}`}>
-            <div className={classes.userProfile}>
+        <Tooltip arrow title={localStorage.getUserLogin()}>
+          <div className={classes.userProfile}>
+            <Link to={`/profile?id=${userId}`}>
               {isNaN(userImg) || userImg === null ? (
                 <Pic size="small" src={userImg} />
               ) : (
                 <Pic size="small" src="" />
               )}
-            </div>
-          </Link>
+            </Link>
+          </div>
         </Tooltip>
       )}
     </div>

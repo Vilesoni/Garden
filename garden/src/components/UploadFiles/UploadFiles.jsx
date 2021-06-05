@@ -4,8 +4,7 @@ import classes from "./UploadFiles.module.css";
 import FilePreview from "./FilePreview/FilePreview";
 import Button from "../UI/Button/Button";
 import Warning from "../UI/Warning/Warning";
-import localStorage from "../../localStorage"
-
+import localStorage from "../../localStorage";
 
 const UploadFiles = (props) => {
   const [file, setFile] = useState(null);
@@ -35,7 +34,7 @@ const UploadFiles = (props) => {
       await axios.post("/api/move-files", {
         fileName: result.data,
         folder: props.folder,
-        userId: localStorage.getUser()[0]
+        userId: localStorage.getUser()[0],
       });
       if (result.data) {
         setFileName(result.data);
@@ -53,12 +52,15 @@ const UploadFiles = (props) => {
     e.preventDefault();
     setFileSelect("uploadNone");
     const fileData = e.target.files[0];
-    if (fileData) {
+    console.log(fileData);
+    if (fileData !== undefined) {
       setFile(fileData);
       setFilePath(URL.createObjectURL(fileData));
       setFileInfo(
         `${fileData.name} ${(fileData.size / 1024 / 1024).toFixed(2)}MB`
       );
+    } else {
+      setFileSelect("upload");
     }
   };
   useEffect(() => {
@@ -95,7 +97,12 @@ const UploadFiles = (props) => {
       ) : (
         false
       )}
-      <Warning id="warn" text={warn.text} display={warn.display} type={warn.type} />
+      <Warning
+        id="warn"
+        text={warn.text}
+        display={warn.display}
+        type={warn.type}
+      />
       {filePath !== null ? (
         <div>
           <Button text="Загрузить" onClick={upload} />

@@ -1,11 +1,15 @@
-const user = window.localStorage.getItem("user");
 const setUser = (id, login, imgPath, admin) => {
   const user = [id, login, imgPath, admin];
   window.localStorage.setItem("user", JSON.stringify(user));
 };
 const getUserId = () => {
-  if (user) {
-    return JSON.parse(user)[0];
+  if (window.localStorage.getItem("user")) {
+    return JSON.parse(window.localStorage.getItem("user"))[0];
+  }
+};
+const getUserLogin = () => {
+  if (window.localStorage.getItem("user")) {
+    return JSON.parse(window.localStorage.getItem("user"))[1];
   }
 };
 const deleteUser = () => {
@@ -14,5 +18,6 @@ const deleteUser = () => {
 module.exports = {
   setUser,
   getUserId,
+  getUserLogin,
   deleteUser,
 };
