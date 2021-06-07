@@ -45,7 +45,7 @@ app.post("/api/delete-files", files.removeFile);
 app.post("/api/upload-files", files.saveFile);
 app.post("/api/move-files", files.moveFile);
 
-
-app.listen(8000, () => {
-  console.log("Running on 8000!");
+ 
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Running on ${PORT}!`);
 });
