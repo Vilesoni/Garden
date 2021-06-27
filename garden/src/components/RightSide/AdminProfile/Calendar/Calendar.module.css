@@ -1,0 +1,71 @@
+.months {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 0.3em;
+  row-gap: 0.3em;
+}
+.months > div {
+  background-color: #e0e0e0;
+  padding: 0.1em 0.3em;
+  border-radius: 0.5em;
+  font-weight: 600;
+  transition: all ease 0.3s;
+}
+.months > div:hover {
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: #d1d1d1;
+}
+.month {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 1em 0;
+}
+.head {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  border-bottom: 1px solid #e1e1e1;
+}
+.rows {
+  padding: 0.5em;
+  border-bottom: 1px solid #e1e1e1;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+}
+.value{
+  font-size: .9em;
+}
+.body{
+  margin-bottom: .5em;
+  overflow-y: scroll;
+  height: 40vh;
+
+}
+.closeBlock{
+  text-align: right;
+  margin: 1em;
+}
+.close:hover{
+  cursor: pointer;
+}
+.btn{
+  margin-top: 1em;
+}
+.inputBlock{
+  margin-bottom: 1em;
+}
+.select{
+  border-radius: .5em;
+  border: 1px solid #E1E1E1;
+  background-color: #F5F5F5;
+  padding: .3em;
+  color: #767676;
+  font-weight: 600;
+}
+.select:hover{
+  cursor: pointer;
+  border: 1px solid #CCCCCC;
+}

@@ -17,7 +17,7 @@ const CalendarItem = (props) => {
           month: props.monthCount,
           culture: props.culture,
         });
-        faroble = SetArrays(result.data[0].farobleDays.split("-"));
+        faroble = result.data[0].farobleDays.split(",");
         noFaroble = result.data[0].noFarobleDays.split(",");
       } catch (error) {
         console.error(error.message);
@@ -25,13 +25,6 @@ const CalendarItem = (props) => {
     }
     setCalendar(getMonth(props.monthCount, year, faroble, noFaroble));
   };
-  function SetArrays(arr){
-    var newArr = []
-    for (let i = parseInt(arr[0]); i <= arr[1]; i++) {
-      newArr.push(i);
-    }
-    return newArr;
-  }
   return (
     <div className={classes.CalendarItem}>
       <div className={classes.calendar}>
@@ -105,7 +98,7 @@ function getMonth(month, year, farobleDays, noFarobleDays) {
             ? "current"
             : "origin";
         frbl =
-          farobleDays.includes(currDay)
+          farobleDays.includes(currDay.toString())
             ? "faroble"
             : "origin";
         noFrbl = noFarobleDays.includes(currDay.toString())

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import classes from "./Calendar.module.css";
 import Months from "./Months/Months.jsx";
 import CalendarItem from "./CalendarItem/CalendarItem.jsx";
 import Cultures from "./Cultures/Cultures.jsx";
 
-const Calendar = (props) => {
+const Calendar = () => {
   const [monthName, setMonthName] = useState("");
   const [monthCount, setMonthCount] = useState(0);
   const [close, setClose] = useState("");
@@ -38,13 +38,11 @@ const Calendar = (props) => {
         </span>
       </div>
       <div className={classes.month}>{monthName}</div>
-      {showCalendar ? (
+      {showCalendar &&(
         <div>
           <Cultures month={monthCount} update={CulturesUpdate} />
           <CalendarItem monthCount={monthCount} culture={culture} />
         </div>
-      ) : (
-        false
       )}
     </div>
   );

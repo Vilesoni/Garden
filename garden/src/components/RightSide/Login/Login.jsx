@@ -15,24 +15,25 @@ const Login = (props) => {
   const [display, setDisplay] = useState("hide");
   const [type, setType] = useState("");
   const userLogin = async () => {
-    await axios
-      .post("/api/users/login", {
-        login: login,
-        password: password,
-      })
-      .then((response) => {
-        if (response.data.length !== 0) {
-          props.history.push(`/profile?id=${response.data[0].id}`);
-          localStorage.setUser(
-            response.data[0].id,
-            response.data[0].login,
-            response.data[0].imgPath,
-            response.data[0].admin
-          );
-        } else {
-          Warn("Проверьте имя пользователя или пароль", "error", "show");
-        }
-      });
+    const result = await axios.post("/api/users/login", {
+      login: login,
+      password: password,
+    });
+    if (result.data.action === "ok") {
+      localStorage.setUser(
+        result.data.data.id,
+        result.data.data.login,
+        result.data.data.imgPath,
+        result.data.data.admin
+      );
+      if (result.data.data.admin === 1) {
+        props.history.push(`/admin`);
+      } else {
+        props.history.push(`/profile?id=${result.data.data.id}`);
+      }
+    } else {
+      Warn("Проверьте имя пользователя или пароль", "error", "show");
+    }
   };
   const Warn = (text, type, display) => {
     setWarning(text);
@@ -71,12 +72,18 @@ const Login = (props) => {
           }}
         />
         <div className={classes.links}>
-          <Link to="/logup">
-            <p className={classes.logup}>Нет аккаунта? Зарегистрироваться</p>
-          </Link>
-          {/* <Link to="/recover">
-            <p className={classes.logup}>Забыли пароль?</p>
-          </Link> */}
+          <span>
+            <Link to="/logup">
+              <span className={classes.logup}>
+                Нет аккаунта? Зарегистрироваться
+              </span>
+            </Link>
+          </span>
+          <span>
+            <Link to="/recover">
+              <span className={classes.logup}>Забыли пароль?</span>
+            </Link>
+          </span>
         </div>
       </div>
     </div>

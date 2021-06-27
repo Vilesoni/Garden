@@ -10,7 +10,7 @@ const Likes = (props) => {
   const [like, setLike] = useState(false);
   const [img, setImg] = useState(unliked);
   const [count, setCount] = useState(0);
-  const userId = isNaN(localStorage.getUserId()) ? -1 : localStorage.getUserId();
+  const userId = isNaN(localStorage.getUserId()) ? null : localStorage.getUserId();
   useEffect(() => {
     fetchData();
   }, []);
@@ -23,9 +23,9 @@ const Likes = (props) => {
           userId: userId,
         }
       );
-      setCount(result.data[0].count);
-      result.data[0].ifSet ? setImg(liked) : setImg(unliked);
-      result.data[0].ifSet ? setLike(true) : setLike(false);
+      setCount(result.data.count);
+      result.data.liked ? setImg(liked) : setImg(unliked);
+      result.data.liked ? setLike(true) : setLike(false);
     } catch (error) {
       console.error(error.message);
     }
@@ -69,7 +69,7 @@ const Likes = (props) => {
 };
 function setClass(userId) {
   let arr = [];
-  userId === -1
+  userId === null
     ? (arr = [classes.like, classes.noAuth])
     : (arr = [classes.like]);
   return arr.join(" ");

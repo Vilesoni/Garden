@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs-extra");
 
 const tempPath = "./tmpUploadings/";
-const uploadPath = "../garden/public/upload/";
+const uploadPath = "https://agitated-noether-80e9db.netlify.app/public/upload/";
 
 const saveFile = (req, res) => {
   try {
@@ -14,9 +14,9 @@ const saveFile = (req, res) => {
     const filePath = tempPath + fileName;
     file.mv(filePath, (err) => {
       if (err) {
-        console.log(err);
+        res.send(err)
       } else {
-        res.send(fileName);
+        res.send(filePath);
       }
     });
   } catch (e) {

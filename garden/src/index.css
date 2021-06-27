@@ -6,7 +6,8 @@
 input,
 textarea,
 button,
-a {
+a,
+select {
   outline: none;
   box-sizing: border-box;
   text-decoration: none;
@@ -24,4 +25,8 @@ blockquote{
   background-color: #E9E9E9;
   padding: .5em 1em;
   border-left: 3px solid #cccccc;
+}
+@page {
+  size: auto;
+  margin: 20mm;
 }

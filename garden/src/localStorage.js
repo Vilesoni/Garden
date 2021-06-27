@@ -12,6 +12,11 @@ const getUserLogin = () => {
     return JSON.parse(window.localStorage.getItem("user"))[1];
   }
 };
+const getUserRights = () => {
+  if (window.localStorage.getItem("user")) {
+    return JSON.parse(window.localStorage.getItem("user"))[3];
+  }
+};
 const deleteUser = () => {
   window.localStorage.clear();
 };
@@ -19,5 +24,6 @@ module.exports = {
   setUser,
   getUserId,
   getUserLogin,
+  getUserRights,
   deleteUser,
 };

@@ -10,17 +10,14 @@ import UploadFiles from "../../UploadFiles/UploadFiles";
 import Pic from "../../UI/Pic/Pic.jsx";
 import back from "./back.png";
 import localStorage from "../../../localStorage";
+import Warning from "../../UI/Warning/Warning";
 
 const ProfileEdit = (props) => {
+  const userId = localStorage.getUserId();
+  const [login, setLogin] = useState("");
   const [fullName, setFullName] = useState("");
-  const [warning, setWarning] = useState("");
   const [img, setImg] = useState(null);
-  const [userImg, setUserImg] = useState(null);
-  const [login, setLogin] = useState(localStorage.getUser()[1]);
-  const userId = localStorage.getUser()[0];
-  function UploadUpdate(value) {
-    setImg(value);
-  }
+  const [warn, setWarn] = useState({ text: "", type: "", display: "hide" });
   useEffect(() => {
     fetchData();
   }, []);
@@ -29,33 +26,52 @@ const ProfileEdit = (props) => {
       const result = await axios.post("/api/users/get-by-id", {
         userId: userId,
       });
-      string.isEmpty(result.data[0].fullName)
-        ? setFullName("")
-        : setFullName(result.data[0].fullName);
-        setUserImg(result.data[0].imgPath);
-        setImg(result.data[0].imgPath);
+      setLogin(result.data[0].login);
+      result.data[0].fullName !== null && setFullName(result.data[0].fullName);
+      setImg(result.data[0].imgPath);
     } catch (error) {
       console.error(error.message);
     }
   };
-  const editUser = () => {
-    try {
-      axios
-        .post("/api/users/edit", {
-          userId: userId,
-          login: login,
-          fullName: fullName,
-          imgPath: img,
-        })
-        .then((response) => {
-          if (response.data[0].edited === 1) {
+  const UploadUpdate = (value) => {
+    setImg(value);
+  };
+  const editUser = async (e) => {
+    e.preventDefault();
+    if (!string.isEmpty(login)) {
+      if (string.isLogin(login) && string.isName(fullName)) {
+        try {
+          const result = await axios.post("/api/users/edit", {
+            userId: userId,
+            login: login,
+            fullName: fullName,
+            imgPath: img,
+          });
+          if (result.data === "edited") {
             props.history.push(`/profile?id=${userId}`);
           } else {
-            setWarning("Такой пользователь уже существует");
+            setWarn({
+              text: "Такой пользователь уже существует!",
+              type: "warn",
+              display: "show",
+            });
           }
+        } catch (error) {
+          console.error(error.message);
+        }
+      } else {
+        setWarn({
+          text: "Проверьте правильность введенных данных",
+          type: "warn",
+          display: "show",
         });
-    } catch (error) {
-      console.error(error.message);
+      }
+    } else {
+      setWarn({
+        text: "Поле Имя пользователя обязательно для заполнения",
+        type: "warn",
+        display: "show",
+      });
     }
   };
   return (
@@ -69,51 +85,35 @@ const ProfileEdit = (props) => {
       </div>
       <div className={classes.user_info}>
         <div className={classes.pic}>
-          <Pic src={userImg} size="huge" />
+          <Pic src={img} size="huge" />
         </div>
-        <UploadFiles update={UploadUpdate} accept=".jpg,.png"/>
+        <UploadFiles update={UploadUpdate} type="image" accept="image/*" />
         <div className={classes.info}>
           <input
             className={classes.input}
+            value={login}
+            maxLength="16"
+            minLength="5"
             onChange={(e) => {
               setLogin(e.target.value);
-              setWarning("");
+              setWarn({ text: "", type: "", display: "hide" });
             }}
-            value={login}
             placeholder="Имя пользователя"
           />
           <input
             className={classes.input}
+            value={fullName}
             onChange={(e) => {
               setFullName(e.target.value);
-              setWarning("");
+              setWarn({ text: "", type: "", display: "hide" });
             }}
-            value={fullName}
             maxLength="100"
             placeholder="Фамилия Имя"
           />
         </div>
-        <div className={classes.warning}>{warning}</div>
+        <Warning text={warn.text} type={warn.type} display={warn.display} />
         <div className={classes.button}>
-          <Button
-            text="Сохранить"
-            color="blue"
-            onClick={() => {
-              if (!string.isEmpty(login)) {
-                if (!string.isLogin(login)) {
-                  setWarning("Неверное имя пользователя");
-                }
-                if (!string.isName(fullName) && !string.isEmpty(fullName)) {
-                  setWarning("Фамилия имя введены неверно");
-                }
-                if (string.isLogin(login)) {
-                  editUser(userId, login, fullName, img);
-                }
-              } else {
-                setWarning("Заполните обязательные поля");
-              }
-            }}
-          />
+          <Button text="Сохранить" color="blue" onClick={editUser} />
         </div>
       </div>
     </div>

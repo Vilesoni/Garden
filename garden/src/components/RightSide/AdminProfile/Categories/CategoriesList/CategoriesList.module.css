@@ -1,0 +1,25 @@
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.3em;
+  row-gap: 0.3em;
+  justify-content: center;
+  font-weight: 600;
+}
+.items > div,
+.choosenCat > span {
+  background-color: #e0e0e0;
+  border-radius: 0.5em;
+  padding: 0.3em 0.5em;
+  transition: all ease 0.3s;
+}
+.items > div:hover,
+.choosenCat > span {
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: #afc3a2;
+  color: #617c52;
+}
+.choosenCat {
+  margin: 1em 0;
+}

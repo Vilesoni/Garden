@@ -1,0 +1,11 @@
+.Confirm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form {
+  display: grid;
+  row-gap: 1em;
+  width: 20em;
+}

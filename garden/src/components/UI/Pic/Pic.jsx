@@ -3,7 +3,7 @@ import classes from "./Pic.module.css";
 import avatar from "./default.png";
 const Pic = (props) => {
   const errUrl = avatar;
-  const src = props.src === null ? avatar : `/images/${props.src}`;
+  const src = props.src === null ? avatar : props.src;
   const cls = [classes.container, classes[props.size]];
   return (
     <div className={cls.join(" ")}>

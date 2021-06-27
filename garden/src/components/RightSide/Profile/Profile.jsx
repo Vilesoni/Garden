@@ -7,6 +7,7 @@ import UserInfo from "./UserInfo/UserInfo.jsx";
 import Articles from "./Articles/Articles.jsx";
 import Warning from "../../UI/Warning/Warning";
 import localStorage from "../../../localStorage";
+import SyncLoader from "react-spinners/SyncLoader";
 
 function getURLid() {
   let url = new URL(window.location.href);
@@ -17,10 +18,12 @@ const Profile = (props) => {
   const [url, setUrl] = useState("/api/users/get-by-id-articles");
   const [exist, setExist] = useState(false);
   const [display, setDisplay] = useState("hide");
+  const [loading, setLooading] = useState(false);
   useEffect(() => {
     fetchData();
   }, [userId]);
   const fetchData = async () => {
+    setLooading(true);
     await axios
       .post("/api/users/get-by-id", {
         userId: userId,
@@ -34,10 +37,15 @@ const Profile = (props) => {
           setDisplay(false);
         }
       });
+    setLooading(false);
   };
   return (
     <div className={classes.Profile}>
-      {exist ? (
+      {loading ? (
+        <div className={classes.loader}>
+          <SyncLoader color="#86a573" />
+        </div>
+      ) : exist ? (
         <div>
           <UserInfo userId={userId} />
           <div className={classes.nav}>
@@ -45,20 +53,28 @@ const Profile = (props) => {
               <div onClick={() => setUrl("/api/users/get-by-id-articles")}>
                 <span className={classes.navLink}>Мои статьи</span>
                 <Tooltip arrow title="Создать статью">
-                  <span className={classes.add} onClick={
-                    () => props.history.push("/create/article")
-                  }>+</span>
+                  <span
+                    className={classes.add}
+                    onClick={() => props.history.push("/create/article")}
+                  >
+                    +
+                  </span>
                 </Tooltip>
               </div>
             ) : (
               <div className={classes.title}>Статьи</div>
             )}
             {localStorage.getUserId() === userId ? (
-              <div
-                onClick={() => setUrl("/api/users/get-by-id-articles-liked")}
-              >
-                <span className={classes.navLink}>Понравилось</span>
-              </div>
+              <>
+                <div onClick={() => setUrl("/api/users/get-by-approved")}>
+                  <span className={classes.navLink}>Не подтверждено</span>
+                </div>
+                <div
+                  onClick={() => setUrl("/api/users/get-by-id-articles-liked")}
+                >
+                  <span className={classes.navLink}>Понравилось</span>
+                </div>
+              </>
             ) : (
               false
             )}

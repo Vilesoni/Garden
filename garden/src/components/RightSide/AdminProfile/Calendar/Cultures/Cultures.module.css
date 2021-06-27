@@ -1,0 +1,35 @@
+.title {
+  font-weight: 600;
+  font-size: 1.1em;
+  text-align: center;
+  border-bottom: 1px solid #e1e1e1;
+  margin: 1em;
+}
+.culture {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5em;
+  row-gap: 0.5em;
+  justify-content: center;
+  align-items: center;
+}
+.cultureItem {
+  background-color: #e1e1e1;
+  border-radius: 0.5em;
+  padding: 0.1em 0.5em;
+  font-weight: 600;
+  transition: all ease 0.3s;
+}
+.cultureItem:hover {
+  cursor:default;
+}
+.close {
+  padding: 0 0.4em;
+  transition: all ease .5s;
+  margin-left: .5em
+}
+.close:hover {
+  border-radius: 1em;
+  background-color: #cccccc;
+  cursor: pointer;
+}

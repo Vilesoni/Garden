@@ -13,7 +13,7 @@ const isEmpty = (e) => {
   }
 };
 const isLogin = (login) => {
-  const reg = /^[a-z0-9_-]{3,16}$/;
+  const reg = /^[a-z0-9_-]/;
   return reg.test(String(login).toLowerCase());
 };
 const isEmail = (email) => {
@@ -26,13 +26,21 @@ const isPassword = (password) => {
   return reg.test(String(password).toLowerCase());
 };
 const isName = (name) => {
+  if (isEmpty(name)) {
+    return true;
+  }
   const reg = /^[a-zA-Za-яА-ЯЁё ]+$/;
   return reg.test(String(name).toLowerCase());
 };
+const isNumbers = (string) => {
+  const reg = /^[0-9]+$/;
+  return reg.test(String(string).toLowerCase());
+}
 module.exports = {
   isEmpty,
   isLogin,
   isEmail,
   isPassword,
-  isName
+  isName,
+  isNumbers
 };

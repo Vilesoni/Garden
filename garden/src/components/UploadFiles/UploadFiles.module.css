@@ -36,3 +36,8 @@
   width: 100%;
   border: .5em;
 }
+.loader{
+  display: flex;
+  column-gap: 1em;
+  align-items: center;
+}

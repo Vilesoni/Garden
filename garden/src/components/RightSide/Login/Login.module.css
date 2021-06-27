@@ -24,3 +24,8 @@
 .form > a{
   width: 100%;
 }
+.links{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}

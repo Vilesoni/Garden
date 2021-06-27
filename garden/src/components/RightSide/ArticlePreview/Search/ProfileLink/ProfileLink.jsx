@@ -9,7 +9,9 @@ import localStorage from "../../../../../localStorage";
 
 const ProfileLink = () => {
   const userId = localStorage.getUserId();
+  const userRights = localStorage.getUserRights();
   const [userImg, setUserImg] = useState(null);
+  const [link, setLink] = useState("");
   useEffect(() => {
     if (userId) {
       fetchData();
@@ -21,6 +23,7 @@ const ProfileLink = () => {
         userId: userId,
       });
       setUserImg(result.data[0].imgPath);
+      userRights == 1 ? setLink(`/admin`) : setLink(`/profile?id=${userId}`);
     } catch (error) {
       console.error(error.message);
     }
@@ -34,7 +37,7 @@ const ProfileLink = () => {
       ) : (
         <Tooltip arrow title={localStorage.getUserLogin()}>
           <div className={classes.userProfile}>
-            <Link to={`/profile?id=${userId}`}>
+            <Link to={link}>
               {isNaN(userImg) || userImg === null ? (
                 <Pic size="small" src={userImg} />
               ) : (

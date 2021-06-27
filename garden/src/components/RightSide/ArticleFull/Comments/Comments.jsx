@@ -6,7 +6,6 @@ import Info from "../../Info/Info.jsx";
 import Warning from "../../../UI/Warning/Warning.jsx";
 import Textarea from "../../../UI/Textarea/Textarea.jsx";
 import localStorage from "../../../../localStorage.js";
-import string from "../../../../string.js";
 import sent from "./sent.png";
 
 const Comments = (props) => {

@@ -50,6 +50,7 @@ const Editor = (props) => {
         text.slice(cursorEnd, text.length),
       ].join("");
       setText(output);
+      props.update(mdParser.render(output), output);
     }
   };
   const header2 = () => {
@@ -118,6 +119,10 @@ const Editor = (props) => {
     { text: "«»", toltip: "Цитата", action: qoute },
     { text: "∞", toltip: "Ссылка", action: link },
   ];
+  const onChangeTextAreaHandler = (e) => {
+    props.update(mdParser.render(e.target.value), e.target.value);
+    setText(e.target.value);
+  };
   return (
     <div className={classes.Editor}>
       <div className={classes.nav}>
@@ -128,6 +133,7 @@ const Editor = (props) => {
               onClick={() => {
                 item.action();
                 removePosition();
+
               }}
             >
               {item.text}
@@ -142,14 +148,14 @@ const Editor = (props) => {
             rows="10"
             placeholder="Начните писать..."
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={onChangeTextAreaHandler}
             onClick={setPosition}
           />
         </div>
         <div
           className={classes.view}
           dangerouslySetInnerHTML={{
-            __html: mdParser.render(text.replace(/\n/g, "   \n")),
+            __html: mdParser.render(text.replace(/\n/g, "  \n")),
           }}
         />
       </div>

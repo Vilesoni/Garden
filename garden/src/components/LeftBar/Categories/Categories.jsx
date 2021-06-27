@@ -18,9 +18,11 @@ const Categories = () => {
   };
   return (
     <div className={classes.Categories}>
-      {category.map((item) => (
-        <CategoryItem key={item.id} text={item.name} id={item.id} />
-      ))}
+      {category.length !== 0
+        ? category.map((item) => (
+            <CategoryItem key={item.id} text={item.name} id={item.id} />
+          ))
+        : false}
     </div>
   );
 };

@@ -32,3 +32,10 @@
 .blue:hover {
   background-color: #c1d2d7;
 }
+.red {
+  color: #9a6556;
+  border: 1px solid #f7a289;
+}
+.red:hover {
+  background-color: #f9b9a7;
+}

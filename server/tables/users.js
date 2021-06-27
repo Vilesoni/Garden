@@ -1,6 +1,7 @@
 const { db } = require("../config.js");
+const bcrypt = require("bcryptjs");
 
-const getRating = (req, res, next) => {
+const getRating = (req, res) => {
   db.query(`select * from users_rating`, (err, result) => {
     if (err) {
       res.send(err);
@@ -10,7 +11,7 @@ const getRating = (req, res, next) => {
   });
 };
 
-const getById = (req, res, next) => {
+const getById = (req, res) => {
   const userId = req.body.userId;
   db.query(
     `select * from users 
@@ -24,8 +25,27 @@ const getById = (req, res, next) => {
     }
   );
 };
+const getByLogin = (req, res) => {
+  const login = req.body.login;
+  const email = req.body.email;
+  db.query(
+    `select count(*) as count from users 
+  where login='${login}' or email='${email}'`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        if (result[0].count <= 0) {
+          res.send("ok");
+        } else {
+          res.send("exist");
+        }
+      }
+    }
+  );
+};
 
-const getByIdArticles = (req, res, next) => {
+const getByIdArticles = (req, res) => {
   const userId = req.body.userId;
   db.query(
     `select * from user_articles_view 
@@ -40,7 +60,7 @@ const getByIdArticles = (req, res, next) => {
   );
 };
 
-const getByIdArticlesLiked = (req, res, next) => {
+const getByIdArticlesLiked = (req, res) => {
   const userId = req.body.userId;
   db.query(
     `select * from user_liked_view 
@@ -55,12 +75,11 @@ const getByIdArticlesLiked = (req, res, next) => {
   );
 };
 
-const login = (req, res, next) => {
-  const login = req.body.login;
-  const password = req.body.password;
+const getByApproved = (req, res) => {
+  const userId = req.body.userId;
   db.query(
-    `select * from users 
-  where login='${login}' and password='${password}'`,
+    `select * from user_articles_confirmation 
+  where userId='${userId}'`,
     (err, result) => {
       if (err) {
         res.send(err);
@@ -71,37 +90,96 @@ const login = (req, res, next) => {
   );
 };
 
-const logup = (req, res, next) => {
+const login = (req, res) => {
   const login = req.body.login;
-  const email = req.body.email;
   const password = req.body.password;
   db.query(
-    `call logup('${login}','${email}','${password}', @inserted)`,
+    `select count(*) as count from users 
+  where login='${login}'`,
     (err, result) => {
       if (err) {
         res.send(err);
       } else {
-        db.query(`select @inserted as inserted`, (err, result) => {
-          if (err) {
-            res.send(err);
-          } else {
-            if (result[0].inserted === 1) {
-              db.query(
-                `select id, login, imgPath, admin 
-                from users where login='${login}'`,
-                (err, result) => {
-                  if (err) {
-                    res.send(err);
-                  } else {
-                    res.send(result);
-                  }
+        if (result[0].count > 0) {
+          db.query(
+            `select password from users where login='${login}'`,
+            (err, result) => {
+              if (err) {
+                res.send(err);
+              } else {
+                const verified = bcrypt.compareSync(
+                  password,
+                  result[0].password
+                );
+                if (verified) {
+                  db.query(
+                    `select * from users where login='${login}'`,
+                    (err, result) => {
+                      if (err) {
+                        res.send(err);
+                      } else {
+                        res.send({ action: "ok", data: result[0] });
+                      }
+                    }
+                  );
+                } else {
+                  res.send("none");
                 }
-              );
-            } else {
-              res.send(result);
+              }
             }
-          }
-        });
+          );
+        } else {
+          res.send("none");
+        }
+      }
+    }
+  );
+};
+const addUser = (req, res) => {
+  const login = req.body.login;
+  const email = req.body.email;
+  const password = req.body.password;
+  const code = req.body.code;
+  db.query(
+    `select count(*) as count from user_confirm 
+    where login='${login}' and confirmCode='${code}'`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        if (result[0].count > 0) {
+          db.query(
+            `insert into users(login, email, password)
+        values('${login}', '${email}', '${password}')`,
+            (err) => {
+              if (err) {
+                res.send(err);
+              } else {
+                db.query(
+                  `select * from users where login='${login}'`,
+                  (err, result) => {
+                    if (err) {
+                      res.send(err);
+                    } else {
+                      db.query(
+                        `delete from user_confirm where login='${login}'
+                      and code='${code}'`,
+                        (err) => {
+                          if (err) {
+                            res.send(err);
+                          }
+                        }
+                      );
+                      res.send({ action: "ok", data: result[0] });
+                    }
+                  }
+                );
+              }
+            }
+          );
+        } else {
+          res.send("error");
+        }
       }
     }
   );
@@ -112,19 +190,93 @@ const edit = (req, res, next) => {
   const login = req.body.login;
   const fullName = req.body.fullName;
   const imgPath = req.body.imgPath;
+  var exist;
+  var sameUser;
   db.query(
-    `call edit('${userId}','${login}','${fullName}','${imgPath}', @edited)`,
+    `select count(*) as count from users where login='${login}'`,
     (err, result) => {
       if (err) {
         res.send(err);
       } else {
-        db.query(`select @edited as edited`, (err, result) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.send(result);
+        exist = result[0].count;
+        db.query(
+          `select count(*) as sameUser from users 
+        where login='${login}' and id='${userId}'`,
+          (err, result) => {
+            if (err) {
+              res.send(err);
+            } else {
+              sameUser = result[0].sameUser;
+              if (exist > 1 || sameUser == 1) {
+                db.query(
+                  `update users set login='${login}', 
+              fullName='${fullName}', 
+              imgPath='${imgPath}' 
+              where id='${userId}'`,
+                  (err, result) => {
+                    if (err) {
+                      res.send(err);
+                    } else {
+                      res.send("edited");
+                    }
+                  }
+                );
+              } else {
+                res.send("exists");
+              }
+            }
           }
-        });
+        );
+      }
+    }
+  );
+};
+
+const passwordEdit = (req, res) => {
+  const login = req.body.login;
+  const password = req.body.password;
+  const code = req.body.code;
+  const hashPassword = bcrypt.hashSync(password, 5);
+  db.query(
+    `select * from user_confirm where login='${login}' 
+  and confirmCode='${code}'`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else {
+        if (result.length !== 0) {
+          db.query(
+            `update users set password='${hashPassword}'
+        where login='${login}'`,
+            (err) => {
+              if (err) {
+                res.send(err);
+              } else {
+                db.query(
+                  `delete from user_confirm where login='${login}'
+                  and confirmCode='${code}'`,
+                  (err) => {
+                    if (err) {
+                      res.send(err);
+                    }
+                  }
+                );
+                db.query(
+                  `select * from users where login='${login}'`,
+                  (err, result) => {
+                    if (err) {
+                      res.send(err);
+                    } else {
+                      res.send({ action: "edited", data: result[0] });
+                    }
+                  }
+                );
+              }
+            }
+          );
+        } else {
+          res.send("error");
+        }
       }
     }
   );
@@ -133,9 +285,12 @@ const edit = (req, res, next) => {
 module.exports = {
   getRating,
   login,
-  logup,
+  addUser,
   edit,
   getById,
+  getByLogin,
   getByIdArticles,
   getByIdArticlesLiked,
+  getByApproved,
+  passwordEdit,
 };

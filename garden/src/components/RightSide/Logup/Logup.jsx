@@ -1,46 +1,55 @@
 import React, { useState } from "react";
 import axios from "../../../axios/config";
 import { Link } from "react-router-dom";
+import bcrypt from "bcryptjs";
 import classes from "./Logup.module.css";
 import Button from "../../UI/Button/Button";
 import Warning from "../../UI/Warning/Warning";
 import Input from "../../UI/Input/Input.jsx";
-import localStorage from "../../../localStorage";
 import string from "../../../string";
 
 const Logup = (props) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [warning, setWarning] = useState("");
-  const [display, setDisplay] = useState("hide");
-  const [type, setType] = useState("");
-
+  const [warning, setWarning] = useState({
+    text: "",
+    type: "",
+    display: "hide",
+  });
+  const [sended, setSended] = useState(false);
   const addUser = async () => {
-    await axios
-      .post("/api/users/logup", {
-        login: login,
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        if (isNaN(response.data[0].inserted)) {
-          localStorage.setUser(
-            response.data[0].id,
-            response.data[0].login,
-            response.data[0].imgPath,
-            response.data[0].admin
-          );
-          props.history.push(`/profile?id=${response.data[0].id}`);
-        } else {
-          Warn("Такой пользователь уже существует.", "warn", "show");
-        }
+    const result = await axios.post("/api/users/get-by-login", {
+      login: login,
+      email: email,
+    });
+    if (result.data === "ok") {
+      setSended(true);
+      setWarning({
+        text: `Отправка письма для подтверждения регистрации...`,
+        type: "info",
+        display: "show",
       });
-  };
-  const Warn = (text, type, display) => {
-    setWarning(text);
-    setType(type);
-    setDisplay(display);
+      const hashPassword = bcrypt.hashSync(password, 5);
+      await axios.post("/api/send-mail-logup", {
+        mail: email,
+        login: login,
+        // link: `http://localhost:3000/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
+        link: `https://agitated-noether-80e9db.netlify.app/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
+      });
+      setWarning({
+        text: `Письмо для подтверждения регистрации отправлено по адресу ${email}.`,
+        type: "success",
+        display: "show",
+      });
+      props.history.push("/");
+    } else {
+      setWarning({
+        text: "Такой пользователь уже существует.",
+        type: "warn",
+        display: "show",
+      });
+    }
   };
   return (
     <div className={classes.Logup}>
@@ -50,16 +59,15 @@ const Logup = (props) => {
           type="text"
           maxLength="16"
           onChange={(e) => {
-            Warn("", "", "hide");
+            setWarning({ text: "", type: "", display: "hide" });
             setLogin(e.target.value);
           }}
         />
         <Input
           placeholder="E-mail"
           type="email"
-          pattern=".+@"
           onChange={(e) => {
-            Warn("", "", "hide");
+            setWarning({ text: "", type: "", display: "hide" });
             setEmail(e.target.value);
           }}
         />
@@ -68,40 +76,53 @@ const Logup = (props) => {
           type="password"
           maxLength="16"
           onChange={(e) => {
-            Warn("", "", "hide");
+            setWarning({ text: "", type: "", display: "hide" });
             setPassword(e.target.value);
           }}
         />
-        <Warning text={warning} display={display} type={type} />
-        <Button
-          text="Зарегистрироваться"
-          color="blue"
-          onClick={() => {
-            if (
-              string.isEmpty(login) ||
-              string.isEmpty(email) ||
-              string.isEmpty(password)
-            ) {
-              Warn("Все поля обязательны для заполнения.", "error", "show");
-            } else {
-              if (!string.isLogin(login)) {
-                Warn("Неверное имя пользователя.", "error", "show");
-              }
-              if (!string.isEmail(email)) {
-                Warn("Неверный e-mail.", "error", "show");
-                setWarning("Неверный e-mail");
-              }
-              if (!string.isPassword(password)) {
-                Warn("Неверный пароль.", "error", "show");
-              } else {
-                addUser();
-              }
-            }
-          }}
+        <Warning
+          text={warning.text}
+          display={warning.display}
+          type={warning.type}
         />
-        <Link to="/login">
-          <p className={classes.login}>Уже есть аккаунт? Войти</p>
-        </Link>
+        {!sended && (
+          <Button
+            text="Зарегистрироваться"
+            color="blue"
+            onClick={() => {
+              if (
+                string.isEmpty(login) ||
+                string.isEmpty(email) ||
+                string.isEmpty(password)
+              ) {
+                setWarning({
+                  text: "Все поля обязательны для заполнения.",
+                  type: "error",
+                  display: "show",
+                });
+              } else {
+                if (
+                  !string.isLogin(login) ||
+                  !string.isEmail(email) ||
+                  !string.isPassword(password)
+                ) {
+                  setWarning({
+                    text: "Данные введены неверно.",
+                    type: "error",
+                    display: "show",
+                  });
+                } else {
+                  addUser();
+                }
+              }
+            }}
+          />
+        )}
+        <div className={classes.login_link}>
+          <Link to="/login">
+            <span className={classes.login}>Уже есть аккаунт? Войти</span>
+          </Link>
+        </div>
       </div>
     </div>
   );

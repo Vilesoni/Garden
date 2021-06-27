@@ -4,17 +4,6 @@ import classes from "./FilePreview.module.css";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const FilePreview = (props) => {
-  const remove = async () => {
-    if (props.fileName !== null) {
-      try {
-        await axios.post("/api/delete-files", {
-          fileName: props.fileName,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
   return (
     <div className={classes.FilePreview}>
       <div className={classes.preview_wrapper}>
@@ -38,7 +27,6 @@ const FilePreview = (props) => {
                 className={classes.cross}
                 onClick={() => {
                   props.update();
-                  remove();
                 }}
               >
                 X

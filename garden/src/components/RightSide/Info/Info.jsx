@@ -7,11 +7,13 @@ const Info = (props) => {
     <div className={classes.Info}>
       <div className={classes.date}>{props.date}</div>
       <div className={classes.small}>
-        <Pic src={props.img} size="small"/>
+        <Pic src={props.img} size="small" />
       </div>
-      <div className={classes.user}>
-        <Link to={`/profile?id=${props.id}`}>{props.userName}</Link>
-      </div>
+      <span>
+        <span className={classes.user}>
+          <Link to={`/profile?id=${props.id}`}>{props.userName}</Link>
+        </span>
+      </span>
     </div>
   );
 };

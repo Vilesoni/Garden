@@ -24,11 +24,32 @@ const getByDate = (req, res, next) => {
   );
 };
 
+const getByDateNoApproved = (req, res, next) => {
+  db.query(
+    `select * from articles_view_noapproved where 
+    date(aCreatedAt) = date(CURRENT_TIMESTAMP)`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else [res.send(result)];
+    }
+  );
+};
+
+const getAllNoApproved = (req, res, next) => {
+  db.query(`select * from articles_view_noapproved`, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else [res.send(result)];
+  });
+};
+
 const getByQuery = (req, res, next) => {
   const query = req.body.query;
   db.query(
     `select * from articles_view 
-    where title like '%${query}%' or preview like '%${query}%'`,
+    where title like '%${query}%' or preview like '%${query}%' 
+    or content like '%${query}%'`,
     (err, result) => {
       if (err) {
         res.send(err);
@@ -41,6 +62,18 @@ const getById = (req, res, next) => {
   const articleId = req.body.articleId;
   db.query(
     `select * from articles_view where articleId='${articleId}'`,
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else [res.send(result)];
+    }
+  );
+};
+
+const getByIdNoApproved = (req, res, next) => {
+  const articleId = req.body.articleId;
+  db.query(
+    `select * from articles_view_noapproved where articleId='${articleId}'`,
     (err, result) => {
       if (err) {
         res.send(err);
@@ -67,10 +100,38 @@ const add = (req, res, next) => {
     }
   );
 };
+
+const approve = (req, res) => {
+  const articleId = req.body.articleId;
+  db.query(`update articles set approved=1 where id='${articleId}'`, (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("updated");
+    }
+  });
+};
+
+const remove = (req, res) => {
+  const articleId = req.body.articleId;
+  db.query(`delete from articles where id='${articleId}'`, (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send("deleted");
+    }
+  });
+};
+
 module.exports = {
   getByCategory,
   getByDate,
   getByQuery,
   getById,
-  add
+  add,
+  getByDateNoApproved,
+  getAllNoApproved,
+  getByIdNoApproved,
+  approve,
+  remove
 };

@@ -29,6 +29,7 @@ const Categories = (props) => {
             onClick={(e) => {
               setCategory(`#${item.name}`);
               setStyle("active");
+              props.update(item.id)
             }}
           >
             #{item.name}

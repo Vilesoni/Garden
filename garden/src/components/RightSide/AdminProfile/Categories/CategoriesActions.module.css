@@ -1,0 +1,18 @@
+.CategoriesActions {
+  display: grid;
+  row-gap: 0.5em;
+}
+.addBlock {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1em;
+}
+.add {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 0.3em;
+  align-items: center;
+}
+.add > span:hover {
+  cursor: pointer;
+}
