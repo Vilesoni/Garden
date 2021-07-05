@@ -34,8 +34,8 @@ const Logup = (props) => {
       await axios.post("/api/send-mail-logup", {
         mail: email,
         login: login,
-        // link: `http://localhost:3000/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
-        link: `https://agitated-noether-80e9db.netlify.app/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
+        link: `http://localhost:3000/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
+        // link: `https://agitated-noether-80e9db.netlify.app/confirm/user?login=${login}&email=${email}&password=${hashPassword}`,
       });
       setWarning({
         text: `Письмо для подтверждения регистрации отправлено по адресу ${email}.`,

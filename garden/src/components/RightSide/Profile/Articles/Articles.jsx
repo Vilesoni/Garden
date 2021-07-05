@@ -31,6 +31,7 @@ const Articles = (props) => {
       ) : articles.length !== 0 ? (
         articles.map((item, index) => (
           <div key={index} className={classes.article}>
+            {console.log(item.approved)}
             {item.approved === 1 ? (
               <span>
                 <Link to={`/article?id=${item.articleId}`}>

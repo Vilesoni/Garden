@@ -59,7 +59,7 @@ const Comments = (props) => {
       <div className={classes.comment_wrapper}>
         {isNaN(userId) ? (
           <Warning
-            text="Чтобы оставлять комментарии необходимо авторизоваться."
+            text="Только зарегистрированные пользователи могут оставлять комментарии."
             display="show"
             type="warn"
           />

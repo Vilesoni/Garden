@@ -21,7 +21,7 @@ const sendLogupMail = (req, res) => {
     html: `<h3>${login}, cпаcибо за регистрацию на сайте Сад и огород &#128516;.</h3>
     <p>Код подтверждения: ${confirmCode}.</p></br></br>
     <p>Для подтверждения 
-    регистрации перейдите по ссылке: ${link}.</p></br></br>`,
+    регистрации перейдите по ссылке: ${link}</p>`,
   };
   transparter.sendMail(mailOptions, (err, result) => {
     if (err) {
@@ -45,8 +45,8 @@ const sendLogupMail = (req, res) => {
 const passwordReset = (req, res) => {
   const mail = req.body.mail;
   const login = req.body.login;
-  // const link = `http://localhost:3000/new-password?login=${login}`;
-  const link = `https://agitated-noether-80e9db.netlify.app/new-password?login=${login}`;
+  const link = `http://localhost:3000/new-password?login=${login}`;
+  // const link = `https://agitated-noether-80e9db.netlify.app/new-password?login=${login}`;
   const code = new Date().getMilliseconds();
   db.query(
     `select count(*) as count from users 

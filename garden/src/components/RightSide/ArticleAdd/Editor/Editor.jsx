@@ -2,7 +2,9 @@ import React, { useRef, useState } from "react";
 import MarkdownIt from "markdown-it";
 import { Tooltip } from "@material-ui/core";
 import classes from "./Editor.module.css";
-const mdParser = new MarkdownIt();
+const mdParser = new MarkdownIt({
+  breaks: true,
+});
 
 const Editor = (props) => {
   const [text, setText] = useState("");
@@ -120,8 +122,8 @@ const Editor = (props) => {
     { text: "∞", toltip: "Ссылка", action: link },
   ];
   const onChangeTextAreaHandler = (e) => {
-    props.update(mdParser.render(e.target.value), e.target.value);
     setText(e.target.value);
+    props.update(mdParser.render(e.target.value), e.target.value);
   };
   return (
     <div className={classes.Editor}>
@@ -133,7 +135,6 @@ const Editor = (props) => {
               onClick={() => {
                 item.action();
                 removePosition();
-
               }}
             >
               {item.text}
@@ -155,11 +156,12 @@ const Editor = (props) => {
         <div
           className={classes.view}
           dangerouslySetInnerHTML={{
-            __html: mdParser.render(text.replace(/\n/g, "  \n")),
+            __html: mdParser.render(text),
           }}
         />
       </div>
     </div>
   );
 };
+
 export default Editor;
